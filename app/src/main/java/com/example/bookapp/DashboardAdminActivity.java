@@ -1,17 +1,30 @@
 package com.example.bookapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.bookapp.databinding.ActivityDasboardBinding;
 import com.example.bookapp.databinding.ActivityDashboardAdminBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class DashboardAdminActivity extends AppCompatActivity {
 
@@ -20,16 +33,37 @@ public class DashboardAdminActivity extends AppCompatActivity {
     //firebase auth
     private FirebaseAuth firebaseAuth;
 
+
+
+    DatabaseReference databaseCategories;
+
+    RecyclerView recyclerView;
+    MyAdapter myAdapter;
+    ArrayList<ModelCategory> list;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        databaseCategories= FirebaseDatabase.getInstance().getReference("Categories");
+        list = new ArrayList<>();
+        recyclerView = findViewById(R.id.categoriesRv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new MyAdapter(this,list);
+        recyclerView.setAdapter(myAdapter);
+
+
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
+
+
+
         checkUser();
+        data();
 
         //handle click, logout
         binding.logOutBtn.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +71,11 @@ public class DashboardAdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 checkUser();
+
+
+
+
+
             }
         });
 
@@ -49,6 +88,8 @@ public class DashboardAdminActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private void checkUser() {
         //get current user
@@ -66,4 +107,30 @@ public class DashboardAdminActivity extends AppCompatActivity {
 
         }
     }
+
+    private void data(){
+        databaseCategories.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    ModelCategory category = dataSnapshot.getValue(ModelCategory.class);
+                    list.add(category);
+
+                }
+
+
+                myAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
