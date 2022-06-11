@@ -1,7 +1,9 @@
-package com.example.bookapp;
+package com.example.bookapp.adapters;
 
 import android.annotation.SuppressLint;
 import android.widget.Filter;
+
+import com.example.bookapp.ModelCategory;
 
 import java.util.ArrayList;
 
