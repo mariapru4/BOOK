@@ -1,13 +1,20 @@
 package com.example.bookapp;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.bookapp.databinding.ActivityPdfDetailBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,6 +66,7 @@ public class PdfDetailActivity extends AppCompatActivity {
 //        if (firebaseAuth.getCurrentUser() != null){
 //            checkIsFavorite();
 //        }
+        
 
         loadBookDetails();
 //        loadComments();
@@ -85,21 +93,21 @@ public class PdfDetailActivity extends AppCompatActivity {
             }
         });
 
-//        //handle click, download pdf
-//        binding.downloadBookBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG_DOWNLOAD, "onClick: Checking permission");
-//                if (ContextCompat.checkSelfPermission(PdfDetailActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-//                    Log.d(TAG_DOWNLOAD, "onClick: Permission already granted, can download book");
-//                    MyApplication.downloadBook(PdfDetailActivity.this, ""+bookId, ""+bookTitle, ""+bookUrl);
-//                }
-//                else {
-//                    Log.d(TAG_DOWNLOAD, "onClick: Permission was not granted, request permission...");
-//                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//                }
-//            }
-//        });
+        //handle click, download pdf
+        binding.downloadBookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG_DOWNLOAD, "onClick: Checking permission");
+                if (ContextCompat.checkSelfPermission(PdfDetailActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                    Log.d(TAG_DOWNLOAD, "onClick: Permission already granted, can download book");
+                    MyApplication.downloadBook(PdfDetailActivity.this, ""+bookId, ""+bookTitle, ""+bookUrl);
+                }
+                else {
+                    Log.d(TAG_DOWNLOAD, "onClick: Permission was not granted, request permission...");
+                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                }
+            }
+        });
 
 //        //handle click, add/remove favorite
 //        binding.favoriteBtn.setOnClickListener(new View.OnClickListener() {
@@ -251,18 +259,18 @@ public class PdfDetailActivity extends AppCompatActivity {
 //    }
 
 
-    //request storage permission
-//    private ActivityResultLauncher<String> requestPermissionLauncher =
-//            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-//                if (isGranted){
-//                    Log.d(TAG_DOWNLOAD, "Permission Granted");
-//                    MyApplication.downloadBook(this, ""+bookId, ""+bookTitle, ""+bookUrl);
-//                }
-//                else {
-//                    Log.d(TAG_DOWNLOAD, "Permission was denied...: ");
-//                    Toast.makeText(this, "Permission was denied...", Toast.LENGTH_SHORT).show();
-//                }
-//            });
+//    request storage permission
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted){
+                    Log.d(TAG_DOWNLOAD, "Permission Granted");
+                    MyApplication.downloadBook(this, ""+bookId, ""+bookTitle, ""+bookUrl);
+                }
+                else {
+                    Log.d(TAG_DOWNLOAD, "Permission was denied...: ");
+                    Toast.makeText(this, "Permission was denied...", Toast.LENGTH_SHORT).show();
+                }
+            });
 
     private void loadBookDetails() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
