@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -41,14 +40,16 @@ public class PdfDetailActivity extends AppCompatActivity {
     //progress dialog
     private ProgressDialog progressDialog;
 
+    //arraylist to hold comments
+//    private ArrayList<ModelComment> commentArrayList;
+    //adapter to set to recyclerview
+//    private AdapterComment adapterComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPdfDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
         //get data from intent e.g. bookId
         Intent intent = getIntent();
@@ -63,10 +64,9 @@ public class PdfDetailActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
 
         firebaseAuth = FirebaseAuth.getInstance();
-//        if (firebaseAuth.getCurrentUser() != null){
-//            checkIsFavorite();
-//        }
-        
+        if (firebaseAuth.getCurrentUser() != null){
+            checkIsFavorite();
+        }
 
         loadBookDetails();
 //        loadComments();
@@ -109,25 +109,25 @@ public class PdfDetailActivity extends AppCompatActivity {
             }
         });
 
-//        //handle click, add/remove favorite
-//        binding.favoriteBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (firebaseAuth.getCurrentUser() == null){
-//                    Toast.makeText(PdfDetailActivity.this, "You're not logged in", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    if (isInMyFavorite){
-//                        //in favorite, remove from favorite
-//                        MyApplication.removeFromFavorite(PdfDetailActivity.this, bookId);
-//                    }
-//                    else {
-//                        //not in favorite, add to favorite
-//                        MyApplication.addToFavorite(PdfDetailActivity.this, bookId);
-//                    }
-//                }
-//            }
-//        });
+        //handle click, add/remove favorite
+        binding.favoriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (firebaseAuth.getCurrentUser() == null){
+                    Toast.makeText(PdfDetailActivity.this, "You're not logged in", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (isInMyFavorite){
+                        //in favorite, remove from favorite
+                        MyApplication.removeFromFavorite(PdfDetailActivity.this, bookId);
+                    }
+                    else {
+                        //not in favorite, add to favorite
+                        MyApplication.addToFavorite(PdfDetailActivity.this, bookId);
+                    }
+                }
+            }
+        });
 
 //        //handle click, show comment add dialog
 //        binding.addCommentBtn.setOnClickListener(new View.OnClickListener() {
@@ -178,8 +178,8 @@ public class PdfDetailActivity extends AppCompatActivity {
 //                });
 //    }
 
-//    private String comment = "";
-//
+    private String comment = "";
+
 //    private void addCommentDialog() {
 //        //inflate bind view for dialog
 //        DialogCommentAddBinding commentAddBinding = DialogCommentAddBinding.inflate(LayoutInflater.from(this));
@@ -218,7 +218,7 @@ public class PdfDetailActivity extends AppCompatActivity {
 //        });
 //
 //    }
-//
+
 //    private void addComment() {
 //        //show progress
 //        progressDialog.setMessage("Adding comment...");
@@ -259,7 +259,7 @@ public class PdfDetailActivity extends AppCompatActivity {
 //    }
 
 
-//    request storage permission
+    //request storage permission
     private ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted){
@@ -301,9 +301,8 @@ public class PdfDetailActivity extends AppCompatActivity {
                                 ""+bookUrl,
                                 ""+bookTitle,
                                 binding.pdfView,
-                                binding.progressBar
-
-
+                                binding.progressBar,
+                                binding.pagesTv
                         );
                         MyApplication.loadPdfSize(
                                 ""+bookUrl,
@@ -321,39 +320,39 @@ public class PdfDetailActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                    public void onCancelled(@NonNull  DatabaseError error) {
 
                     }
                 });
     }
 
 
-//    private void checkIsFavorite(){
-//        //logged in check if its in favorite list or not
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-//        reference.child(firebaseAuth.getUid()).child("Favorites").child(bookId)
-//                .addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        isInMyFavorite = snapshot.exists(); //true: if exists, false if not exists
-//                        if (isInMyFavorite){
-//                            //exists in favoirte
-//                            binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_favorite_border_24, 0, 0);
-//                            binding.favoriteBtn.setText("Remove Favorite");
-//                        }
-//                        else {
-//                            //not exists in favorite
-//                            binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_favorite_border_24, 0, 0);
-//                            binding.favoriteBtn.setText("Add Favorite");
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//
-//    }
+    private void checkIsFavorite(){
+        //logged in check if its in favorite list or not
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.child(firebaseAuth.getUid()).child("Favorites").child(bookId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        isInMyFavorite = snapshot.exists(); //true: if exists, false if not exists
+                        if (isInMyFavorite){
+                            //exists in favoirte
+                            binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_favorite_24, 0, 0);
+                            binding.favoriteBtn.setText("Remove Favorite");
+                        }
+                        else {
+                            //not exists in favorite
+                            binding.favoriteBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_baseline_favorite_border_24, 0, 0);
+                            binding.favoriteBtn.setText("Add Favorite");
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+    }
 }
