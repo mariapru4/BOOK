@@ -8,14 +8,26 @@
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable-mdpi/shape_toolbar02.xml" value="0.1565" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_attach_file_24.xml" value="0.2295" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_category_24.xml" value="0.1565" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_chrome_reader_mode_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1715" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1565" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_picture_as_pdf_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_power_settings_new_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1715" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/shape_button.xml" value="0.1565" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/shape_button02.xml" value="0.1565" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/shape_button03.xml" value="0.1565" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/tab_background_selected.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/tab_background_unselected.xml" value="0.1715" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/drawable/tab_selector.xml" value="0.1715" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_category_add.xml" value="0.75" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_dasboard.xml" value="0.24714828897338403" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_dashboard_admin.xml" value="0.1867816091954023" />
-        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_dashboard_user.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_dashboard_user.xml" value="0.1" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_pdf_add.xml" value="0.3482789855072464" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_pdf_detail.xml" value="0.3482789855072464" />
@@ -26,10 +38,12 @@
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_splash.xml" value="0.17" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/activity_userlist.xml" value="0.3482789855072464" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/category.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/fragment_books_user.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/item.xml" value="0.3482789855072464" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/row_category.xml" value="0.33" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/row_comment.xml" value="0.3482789855072464" />
         <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/row_pdf_admin.xml" value="0.33" />
+        <entry key="..\:/Users/Maria/BookApp/app/src/main/res/layout/row_pdf_user.xml" value="0.21784420289855072" />
       </map>
     </option>
   </component>

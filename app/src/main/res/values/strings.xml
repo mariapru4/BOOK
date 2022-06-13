@@ -2,5 +2,7 @@
     <string name="app_name">Book App</string>
     <string name="new_user_signup">New User? <b>SignUp</b></string>
     <string name="category_title">Category Title</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

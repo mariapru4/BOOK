@@ -1,18 +1,31 @@
 package com.example.bookapp;
-
-
 public class ModelCategory {
-  private  String category,id,uid;
-  private long timestamp;
+    //make sure to use same spellings for model variables as in firebase
 
-  public ModelCategory(){
+    String id, category, uid;
+    long timestamp;
 
-  }
-    public ModelCategory(String category, String id, String uid, long timestamp) {
-        this.category = category;
+    //constructor empty required for firebase
+    public ModelCategory() {
+
+    }
+
+    //parametrized construcor
+    public ModelCategory(String id, String category, String uid, long timestamp) {
         this.id = id;
+        this.category = category;
         this.uid = uid;
         this.timestamp = timestamp;
+    }
+
+
+    /*-----Getter/Setters------*/
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCategory() {
@@ -21,14 +34,6 @@ public class ModelCategory {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUid() {
