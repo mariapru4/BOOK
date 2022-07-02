@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     //arraylist to hold the books
     private ArrayList<ModelPdf> pdfArrayList;
 //    //adapter to set in recyclerview
-//    private AdapterPdfFavorite adapterPdfFavorite;
+    private AdapterPdfFavorite adapterPdfFavorite;
 
     //progress dialog
     private ProgressDialog progressDialog;
@@ -225,9 +225,9 @@ public class ProfileActivity extends AppCompatActivity {
                         //set number of favorite books
                         binding.favoriteBookCountTv.setText(""+pdfArrayList.size());//can't set int/long to textview so concatnate with string
                         //setup adapter
-//                        adapterPdfFavorite = new AdapterPdfFavorite(ProfileActivity.this, pdfArrayList);
-//                        //set adapter to recyclerview
-//                        binding.booksRv.setAdapter(adapterPdfFavorite);
+                        adapterPdfFavorite = new AdapterPdfFavorite(ProfileActivity.this, pdfArrayList);
+                        //set adapter to recyclerview
+                        binding.booksRv.setAdapter(adapterPdfFavorite);
 
                     }
 
