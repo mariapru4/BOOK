@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/shape_toolbar01">
+
         <ImageView
             android:id="@+id/icon"
             android:layout_width="110dp"

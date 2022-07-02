@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BookApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfileEditActivity"
             android:exported="false" />
         <activity
