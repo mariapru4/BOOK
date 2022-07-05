@@ -125,7 +125,12 @@ public class DashboardAdminActivity extends AppCompatActivity {
         });
 
 
-
+        binding.tokenB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardAdminActivity.this, NotificationActivity.class));
+            }
+        });
     }
 
 
